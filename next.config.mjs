@@ -6,9 +6,14 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  output: 'export',
-  distDir: 'out',
-  trailingSlash: true,
 };
+
+const isCloudflare = process.env.CLOUDFLARE_WORKERS === '1' || process.env.CF_PAGES === '1';
+
+if (isCloudflare) {
+  nextConfig.output = 'export';
+  nextConfig.distDir = 'out';
+  nextConfig.trailingSlash = true;
+}
 
 export default nextConfig;
